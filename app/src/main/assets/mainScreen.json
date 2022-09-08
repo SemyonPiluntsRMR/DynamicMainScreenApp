@@ -1,0 +1,78 @@
+{
+	"sections": [
+		{
+			"title": "Section with 3 columns",
+			"titleColor": "#000000",
+			"type": {
+				"name": "grid",
+				"columns": 3
+			},
+			"backgroundColor": "#eeeeee",
+			"categories": [
+				{
+					"title": "Category 1",
+					"color": "#00ff00"
+				},
+				{
+					"title": "Category 2",
+					"color": "#004444"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 4",
+					"color": "#ffff00"
+				},
+				{
+					"title": "Category 5",
+					"color": "#0000ff"
+				}
+			]
+		},
+		{
+			"title": "Scrolling with 2 columns",
+			"titleColor": "#000000",
+			"type": {
+				"name": "scroll",
+				"columns": 3
+			},
+			"backgroundColor": "#dddddd",
+			"categories": [
+				{
+					"title": "Category 1",
+					"color": "#00ff00"
+				},
+				{
+					"title": "Category 2",
+					"color": "#004444"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				},
+				{
+					"title": "Category 3",
+					"color": "#ff0000"
+				}
+			]
+		}
+	]
+}
