@@ -43,7 +43,7 @@ class MainActivityViewModel @Inject constructor(private val useCaseMainScreenCon
                     val type = it.type
                     when (type.name) {
                         ContainerTypes.GRID.type -> {
-                            val marginWidth = (Math.ceil(margin).toInt()) * type.columns * 2
+                            val marginWidth = (Math.ceil(margin).toInt()) * 2
                             _girdParams.emit(
                                 GirdParams(
                                     gridCategories = section.categories,
@@ -55,7 +55,8 @@ class MainActivityViewModel @Inject constructor(private val useCaseMainScreenCon
                             _horizontalScrollParams.emit(
                                 HorizontalScrollParams(
                                     scrollCategories = section.categories,
-                                    couloumnWidth = (width / (type.columns + 0.5)).toInt() -(Math.ceil(margin).toInt()) * 2
+                                    couloumnWidth = (width / (type.columns + 0.5)).toInt() - (Math.ceil(margin)
+                                        .toInt()) * 2
                                 )
                             )
                         }
@@ -74,10 +75,10 @@ enum class ContainerTypes(val type: String) {
 
 data class GirdParams(
     val gridCategories: List<Category>,
-    val couloumnWidth: Int
+    val couloumnWidth: Int,
 )
 
 data class HorizontalScrollParams(
     val scrollCategories: List<Category>,
-    val couloumnWidth: Int
+    val couloumnWidth: Int,
 )
