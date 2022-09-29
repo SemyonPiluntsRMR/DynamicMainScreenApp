@@ -33,14 +33,14 @@ class MainActivityCompose : ComponentActivity() {
                 itemsCount = 10,
                 columnsCount = 3,
                 itemsHeight = 100,
-                gridWidth = 200,
+                gridWidth = 300,
                 itemsHeightPercent = 20,
-                parentPaddingStart = 5,
-                parentPaddingEnd = 5,
-                parentPaddingTop = 5,
-                parentPaddingBottom = 5,
-                itemDecorationVertical = 5,
-                itemDecorationHorizontal = 5,
+                parentPaddingStart = 15,
+                parentPaddingEnd = 15,
+                parentPaddingTop = 15,
+                parentPaddingBottom = 15,
+                itemDecorationVertical = 15,
+                itemDecorationHorizontal = 15,
                 hasDinamycHeight = false
             )
         }
