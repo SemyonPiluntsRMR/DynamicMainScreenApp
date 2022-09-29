@@ -1,6 +1,5 @@
 package com.example.myapplication.ui
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.Cyan
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.Magenta
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,12 +51,12 @@ fun DefaultPreview() {
         itemsCount = 10,
         columnsCount = 3,
         itemsHeight = 100,
-        parentPaddingStart = 5,
-        parentPaddingEnd = 5,
-        parentPaddingTop = 5,
-        parentPaddingBottom = 5,
-        itemDecorationVertical = 5,
-        itemDecorationHorizontal = 5,
+        parentPaddingStart = 15,
+        parentPaddingEnd = 15,
+        parentPaddingTop = 15,
+        parentPaddingBottom = 15,
+        itemDecorationVertical = 15,
+        itemDecorationHorizontal = 15,
     )
 }
 
@@ -80,13 +80,17 @@ fun FlexibleGird(
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(columnsCount),
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(BorderStroke(15.dp, Blue))
+            .background(Cyan),
         contentPadding = PaddingValues(
             start = parentPaddingStart.dp,
             end = parentPaddingEnd.dp,
             top = parentPaddingTop.dp,
             bottom = parentPaddingBottom.dp),
         verticalArrangement = Arrangement.spacedBy(itemDecorationVertical.dp),
-        horizontalArrangement = Arrangement.spacedBy(itemDecorationHorizontal.dp)
+        horizontalArrangement = Arrangement.spacedBy(itemDecorationHorizontal.dp),
     ) {
         items(itemsGrid, span = { GridItemSpan(1) }) {
             Box(
