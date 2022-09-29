@@ -5,7 +5,7 @@
 			"titleColor": "#000000",
 			"type": {
 				"name": "grid",
-				"columns": 5
+				"columns": 4
 			},
 			"backgroundColor": "#eeeeee",
 			"categories": [
@@ -36,67 +36,8 @@
 				{
 					"title": "Category 5",
 					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
-				},
-				{
-					"title": "Category 5",
-					"color": "#0000ff"
-				},
-				{
-					"title": "Category 4",
-					"color": "#ffff00"
 				}
+
 			]
 		},
 		{
