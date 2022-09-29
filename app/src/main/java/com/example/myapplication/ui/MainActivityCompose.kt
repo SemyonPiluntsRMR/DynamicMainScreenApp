@@ -33,12 +33,15 @@ class MainActivityCompose : ComponentActivity() {
                 itemsCount = 10,
                 columnsCount = 3,
                 itemsHeight = 100,
+                gridWidth = 200,
+                itemsHeightPercent = 20,
                 parentPaddingStart = 5,
                 parentPaddingEnd = 5,
                 parentPaddingTop = 5,
                 parentPaddingBottom = 5,
                 itemDecorationVertical = 5,
                 itemDecorationHorizontal = 5,
+                hasDinamycHeight = false
             )
         }
     }
@@ -51,12 +54,15 @@ fun DefaultPreview() {
         itemsCount = 10,
         columnsCount = 3,
         itemsHeight = 100,
+        gridWidth = 300,
+        itemsHeightPercent = 20,
         parentPaddingStart = 15,
         parentPaddingEnd = 15,
         parentPaddingTop = 15,
         parentPaddingBottom = 15,
         itemDecorationVertical = 15,
         itemDecorationHorizontal = 15,
+        hasDinamycHeight = false
     )
 }
 
@@ -65,12 +71,15 @@ fun FlexibleGird(
     itemsCount: Int,
     columnsCount: Int,
     itemsHeight: Int,
+    gridWidth: Int,
+    itemsHeightPercent: Int,
     parentPaddingStart: Int,
     parentPaddingEnd: Int,
     parentPaddingTop: Int,
     parentPaddingBottom: Int,
     itemDecorationVertical: Int,
     itemDecorationHorizontal: Int,
+    hasDinamycHeight: Boolean = true,
 ) {
     val itemsInRow = itemsCount % columnsCount
     var itemsGrid = itemsCount
@@ -78,10 +87,15 @@ fun FlexibleGird(
         itemsGrid = itemsCount - itemsInRow
     }
 
+    var itemHeight = itemsHeight
+    if (hasDinamycHeight) {
+        itemHeight = gridWidth * itemsHeightPercent / 100
+    }
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(columnsCount),
         modifier = Modifier
-            .fillMaxWidth()
+            .width(gridWidth.dp)
             .border(BorderStroke(15.dp, Blue))
             .background(Cyan),
         contentPadding = PaddingValues(
@@ -95,7 +109,7 @@ fun FlexibleGird(
         items(itemsGrid, span = { GridItemSpan(1) }) {
             Box(
                 modifier = Modifier
-                    .height(itemsHeight.dp)
+                    .height(itemHeight.dp)
                     .fillMaxWidth()
                     .border(BorderStroke(5.dp, Blue))
                     .background(Gray)
@@ -109,7 +123,7 @@ fun FlexibleGird(
                         modifier = Modifier
                             .weight(1F) // No width specified here because weight controls it
                             .background(color = Magenta)
-                            .height(itemsHeight.dp)
+                            .height(itemHeight.dp)
                             .border(width = 5.dp, color = Black)
                     )
                 }
