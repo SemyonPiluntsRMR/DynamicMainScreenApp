@@ -47,24 +47,24 @@ class MainActivityCompose : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    FlexibleGird(
-        itemsCount = 10,
-        columnsCount = 3,
-        itemsHeight = 100,
-        gridWidth = 300,
-        itemsHeightPercent = 20,
-        parentPaddingStart = 15,
-        parentPaddingEnd = 15,
-        parentPaddingTop = 15,
-        parentPaddingBottom = 15,
-        itemDecorationVertical = 15,
-        itemDecorationHorizontal = 15,
-        hasDinamycHeight = false
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    FlexibleGird(
+//        itemsCount = 10,
+//        columnsCount = 3,
+//        itemsHeight = 100,
+//        gridWidth = 300,
+//        itemsHeightPercent = 20,
+//        parentPaddingStart = 15,
+//        parentPaddingEnd = 15,
+//        parentPaddingTop = 15,
+//        parentPaddingBottom = 15,
+//        itemDecorationVertical = 15,
+//        itemDecorationHorizontal = 15,
+//        hasDinamycHeight = false
+//    )
+//}
 
 @Composable
 fun FlexibleGird(
