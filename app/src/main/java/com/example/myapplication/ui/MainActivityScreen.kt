@@ -84,7 +84,8 @@ fun FlexibleGrid(
         verticalArrangement = verticalArrangement,
         horizontalArrangement = horizontalArrangement,
     ) {
-        items(layoutViewState.items, span = { GridItemSpan(1) }) { item ->
+        items(itemsGrid, span = { GridItemSpan(1) }) { index ->
+            val item = layoutViewState.items.get(index)
             Box(
                 modifier = Modifier
                     .height(itemHeight.dp)
