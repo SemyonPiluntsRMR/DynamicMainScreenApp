@@ -18,25 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlin.random.Random.Default.nextInt
 
-sealed interface ItemsHeight {
-    val heightPercent: Int
-
-    data class Fixed(override val heightPercent: Int, val height: Int) : ItemsHeight
-    data class Dynamic(override val heightPercent: Int) : ItemsHeight
-}
-
-data class ItemViewState(
-    val title: String,
-    val background: Color,
-)
-
-data class GridViewState(
-    val items: List<ItemViewState>,
-    val gridBackground: Color,
-    val columnsCount: Int,
-    val itemsHeight: ItemsHeight,
-)
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
