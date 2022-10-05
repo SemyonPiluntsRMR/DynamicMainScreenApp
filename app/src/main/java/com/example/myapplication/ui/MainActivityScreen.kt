@@ -2,11 +2,13 @@ package com.example.myapplication.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.Color.Companion.Magenta
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kotlin.random.Random.Default.nextInt
 
@@ -28,28 +31,35 @@ fun DefaultPreview() {
         items.add(ItemViewState("title $i", background = colors.get(colorId)))
     }
 
-    val gridViewState =
-        GridViewState(items, columnsCount = 4, gridBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
+    val layoutViewState =
+        LayoutViewState(items, columnsCount = 4, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
 
     FlexibleGrid(
-        gridViewState = gridViewState,
+        layoutViewState = layoutViewState,
         gridWidth = 300,
         paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
         verticalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalArrangement = Arrangement.spacedBy(15.dp)
+    )
+
+    HorizontalScroll(
+        layoutViewState = layoutViewState,
+        layoutWidth = 300,
+        paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     )
 }
 
 @Composable
 fun FlexibleGrid(
-    gridViewState: GridViewState,
+    layoutViewState: LayoutViewState,
     gridWidth: Int,
     paddingValues: PaddingValues,
     verticalArrangement: Arrangement.Vertical,
     horizontalArrangement: Arrangement.Horizontal,
 ) {
-    val itemsCount = gridViewState.items.size
-    val columnsCount = gridViewState.columnsCount
+    val itemsCount = layoutViewState.items.size
+    val columnsCount = layoutViewState.columnsCount
     var itemsGrid = itemsCount
     var itemsInRow = 0
     if (itemsCount > columnsCount) {
@@ -59,7 +69,7 @@ fun FlexibleGrid(
         }
     }
 
-    val itemsHeight = gridViewState.itemsHeight
+    val itemsHeight = layoutViewState.itemsHeight
     var itemHeight = 0
     when (itemsHeight) {
         is ItemsHeight.Fixed -> itemHeight = itemsHeight.height
@@ -68,13 +78,15 @@ fun FlexibleGrid(
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(columnsCount),
-        modifier = Modifier.width(gridWidth.dp).background(gridViewState.gridBackground),
+        modifier = Modifier
+            .width(gridWidth.dp)
+            .background(layoutViewState.layoutBackground),
         contentPadding = paddingValues,
         verticalArrangement = verticalArrangement,
         horizontalArrangement = horizontalArrangement,
     ) {
         items(itemsGrid, span = { GridItemSpan(1) }) { index ->
-            val item = gridViewState.items.get(index)
+            val item = layoutViewState.items.get(index)
             Box(
                 modifier = Modifier
                     .height(itemHeight.dp)
@@ -88,7 +100,7 @@ fun FlexibleGrid(
         items(1, span = { GridItemSpan(columnsCount) }) {
             Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = horizontalArrangement) {
                 for (i in itemsInRow downTo 0) {
-                    val item = gridViewState.items.get(gridViewState.items.size - 1 - i)
+                    val item = layoutViewState.items.get(layoutViewState.items.size - 1 - i)
                     Box(
                         modifier = Modifier
                             .weight(1F) // No width specified here because weight controls it
@@ -98,6 +110,48 @@ fun FlexibleGrid(
                         Text(text = item.title)
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun HorizontalScroll(
+    layoutViewState: LayoutViewState,
+    layoutWidth: Int,
+    paddingValues: PaddingValues,
+    horizontalArrangement: Arrangement.Horizontal,
+) {
+    val columnsCount = layoutViewState.columnsCount
+    val parentPaddingStart = paddingValues.calculateStartPadding(LayoutDirection.Ltr).value
+    val itemWidth =
+        ((layoutWidth - parentPaddingStart - horizontalArrangement.spacing.value * columnsCount) / (columnsCount + 0.5)).toInt()
+
+    val itemsHeight = layoutViewState.itemsHeight
+    var itemHeight = 0
+    when (itemsHeight) {
+        is ItemsHeight.Fixed -> itemHeight = itemsHeight.height
+        is ItemsHeight.Dynamic -> itemHeight = layoutWidth * (itemsHeight.heightPercent) / 100
+    }
+
+    LazyRow(
+        modifier = Modifier
+            .width(layoutWidth.dp)
+            .background(layoutViewState.layoutBackground),
+        contentPadding = paddingValues,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = horizontalArrangement,
+    ) {
+        val itemsCount = layoutViewState.items.size
+        items(itemsCount) { index ->
+            val item = layoutViewState.items.get(index)
+            Box(
+                modifier = Modifier
+                    .width(itemWidth.dp)
+                    .height(itemHeight.dp)
+                    .background(color = item.background)
+            ) {
+                Text(text = item.title)
             }
         }
     }
