@@ -141,7 +141,6 @@ fun HorizontalScroll(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = horizontalArrangement,
     ) {
-        val itemsCount = layoutViewState.items.size
         items(layoutViewState.items) { item ->
             Box(
                 modifier = Modifier
