@@ -3,9 +3,8 @@ package com.example.myapplication.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -85,8 +84,7 @@ fun FlexibleGrid(
         verticalArrangement = verticalArrangement,
         horizontalArrangement = horizontalArrangement,
     ) {
-        items(itemsGrid, span = { GridItemSpan(1) }) { index ->
-            val item = layoutViewState.items.get(index)
+        items(layoutViewState.items, span = { GridItemSpan(1) }) { item ->
             Box(
                 modifier = Modifier
                     .height(itemHeight.dp)
@@ -143,8 +141,7 @@ fun HorizontalScroll(
         horizontalArrangement = horizontalArrangement,
     ) {
         val itemsCount = layoutViewState.items.size
-        items(itemsCount) { index ->
-            val item = layoutViewState.items.get(index)
+        items(layoutViewState.items) { item ->
             Box(
                 modifier = Modifier
                     .width(itemWidth.dp)
