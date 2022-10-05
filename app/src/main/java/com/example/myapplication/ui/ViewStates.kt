@@ -12,6 +12,7 @@ sealed interface ItemsHeight {
 data class ItemViewState(
     val title: String,
     val background: Color,
+    val widthRatio: Float = 1F,
 )
 
 data class LayoutViewState(
