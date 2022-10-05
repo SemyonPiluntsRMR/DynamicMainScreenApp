@@ -14,9 +14,9 @@ data class ItemViewState(
     val background: Color,
 )
 
-data class GridViewState(
+data class LayoutViewState(
     val items: List<ItemViewState>,
-    val gridBackground: Color,
+    val layoutBackground: Color,
     val columnsCount: Int,
     val itemsHeight: ItemsHeight,
 )

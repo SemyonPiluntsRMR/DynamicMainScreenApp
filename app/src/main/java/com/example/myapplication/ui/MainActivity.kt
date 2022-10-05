@@ -43,14 +43,21 @@ class MainActivity : AppCompatActivity() {
                 items.add(ItemViewState("title $i", background = colors.get(colorId)))
             }
 
-            val gridViewState =
-                GridViewState(items, columnsCount = 4, gridBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
+            val layoutViewState =
+                LayoutViewState(items, columnsCount = 2, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
 
             FlexibleGrid(
-                gridViewState = gridViewState,
+                layoutViewState = layoutViewState,
                 gridWidth = 300,
                 paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(15.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            )
+
+            HorizontalScroll(
+                layoutViewState = layoutViewState,
+                layoutWidth = 300,
+                paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             )
         }
