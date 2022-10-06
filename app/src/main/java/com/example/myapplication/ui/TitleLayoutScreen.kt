@@ -29,7 +29,7 @@ fun DefaultPreview() {
         textColor = Magenta,
     )
     TitleLayout(titleViewState,
-        PaddingValues(start = 15.dp, end = 15.dp, top = 0.dp, bottom = 0.dp))
+        PaddingValues(start = 15.dp, end = 15.dp))
 }
 
 @Composable
@@ -42,7 +42,7 @@ fun TitleLayout(
             text = title,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(PaddingValues(start = 0.dp, end = 0.dp, top = layoutMarginTop.dp, bottom = layoutMarginBottom.dp))
+                .padding(PaddingValues(top = layoutMarginTop.dp, bottom = layoutMarginBottom.dp))
                 .background(titleBackground)
                 .padding(paddingValues),
             fontSize = fontSize.sp,
