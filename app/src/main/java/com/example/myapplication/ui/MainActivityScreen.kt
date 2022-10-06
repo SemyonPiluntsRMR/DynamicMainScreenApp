@@ -24,14 +24,17 @@ import kotlin.random.Random.Default.nextInt
 @Composable
 fun DefaultPreview() {
     val colors = listOf(Gray, Red, Green, Yellow, Magenta)
-    val items = mutableListOf<ItemViewState>()
-    for (i in 1..4) {
-        val colorId = nextInt(0, 5)
-        items.add(ItemViewState("title $i", background = colors.get(colorId), widthRatio = nextInt(1, 3).toFloat()))
-    }
 
-    val layoutViewState =
-        LayoutViewState(items, columnsCount = 4, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
+    // Below comments needed for other examples
+
+//    val items = mutableListOf<ItemViewState>()
+//    for (i in 1..4) {
+//        val colorId = nextInt(0, 5)
+//        items.add(ItemViewState("title $i", background = colors.get(colorId), widthRatio = nextInt(1, 3).toFloat()))
+//    }
+//
+//    val layoutViewState =
+//        LayoutViewState(items, columnsCount = 4, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
 
 //    FlexibleGrid(
 //        layoutViewState = layoutViewState,
@@ -48,8 +51,22 @@ fun DefaultPreview() {
 //        horizontalArrangement = Arrangement.spacedBy(15.dp)
 //    )
 
+    val items = mutableListOf<ItemViewStateRatio>()
+    for (i in 1..4) {
+        val colorId = nextInt(0, 5)
+        items.add(ItemViewStateRatio("title $i",
+            background = colors.get(colorId),
+            widthRatio = nextInt(1, 3).toFloat()))
+    }
+
+    val layoutViewStateRatio =
+        LayoutViewStateRatio(items,
+            columnsCount = 4,
+            layoutBackground = Color.Cyan,
+            itemsHeight = ItemsHeight.Dynamic(20))
+
     WidgetLayout(
-        layoutViewState = layoutViewState,
+        layoutViewState = layoutViewStateRatio,
         layoutWidth = 500,
         paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
         horizontalArrangement = Arrangement.spacedBy(15.dp)
@@ -164,7 +181,7 @@ fun HorizontalScroll(
 
 @Composable
 fun WidgetLayout(
-    layoutViewState: LayoutViewState,
+    layoutViewState: LayoutViewStateRatio,
     layoutWidth: Int,
     paddingValues: PaddingValues,
     horizontalArrangement: Arrangement.Horizontal,
@@ -193,6 +210,8 @@ fun WidgetLayout(
             ) {
                 Text(text = item.title)
             }
+
+
         }
     }
 }
