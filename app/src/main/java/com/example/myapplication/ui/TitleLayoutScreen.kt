@@ -2,7 +2,9 @@ package com.example.myapplication.ui.adapters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -39,6 +41,7 @@ fun TitleLayout(
         Text(
             text = title,
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(PaddingValues(start = 0.dp, end = 0.dp, top = layoutMarginTop.dp, bottom = layoutMarginBottom.dp))
                 .background(titleBackground)
                 .padding(paddingValues),
