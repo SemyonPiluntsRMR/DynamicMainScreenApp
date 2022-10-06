@@ -24,26 +24,50 @@ import kotlin.random.Random.Default.nextInt
 @Composable
 fun DefaultPreview() {
     val colors = listOf(Gray, Red, Green, Yellow, Magenta)
-    val items = mutableListOf<ItemViewState>()
-    for (i in 0..21) {
+
+    // Below comments needed for other examples
+
+//    val items = mutableListOf<ItemViewState>()
+//    for (i in 1..4) {
+//        val colorId = nextInt(0, 5)
+//        items.add(ItemViewState("title $i", background = colors.get(colorId), widthRatio = nextInt(1, 3).toFloat()))
+//    }
+//
+//    val layoutViewState =
+//        LayoutViewState(items, columnsCount = 4, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
+
+//    FlexibleGrid(
+//        layoutViewState = layoutViewState,
+//        gridWidth = 300,
+//        paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
+//        verticalArrangement = Arrangement.spacedBy(15.dp),
+//        horizontalArrangement = Arrangement.spacedBy(15.dp)
+//    )
+//
+//    HorizontalScroll(
+//        layoutViewState = layoutViewState,
+//        layoutWidth = 300,
+//        paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
+//        horizontalArrangement = Arrangement.spacedBy(15.dp)
+//    )
+
+    val items = mutableListOf<ItemViewStateRatio>()
+    for (i in 1..4) {
         val colorId = nextInt(0, 5)
-        items.add(ItemViewState("title $i", background = colors.get(colorId)))
+        items.add(ItemViewStateRatio("title $i",
+            background = colors.get(colorId),
+            widthRatio = nextInt(1, 3).toFloat()))
     }
 
-    val layoutViewState =
-        LayoutViewState(items, columnsCount = 4, layoutBackground = Color.Cyan, itemsHeight = ItemsHeight.Dynamic(20))
+    val layoutViewStateRatio =
+        LayoutViewStateRatio(items,
+            columnsCount = 4,
+            layoutBackground = Color.Cyan,
+            itemsHeight = ItemsHeight.Dynamic(20))
 
-    FlexibleGrid(
-        layoutViewState = layoutViewState,
-        gridWidth = 300,
-        paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
-        verticalArrangement = Arrangement.spacedBy(15.dp),
-        horizontalArrangement = Arrangement.spacedBy(15.dp)
-    )
-
-    HorizontalScroll(
-        layoutViewState = layoutViewState,
-        layoutWidth = 300,
+    WidgetLayout(
+        layoutViewState = layoutViewStateRatio,
+        layoutWidth = 500,
         paddingValues = PaddingValues(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp),
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     )
@@ -96,7 +120,7 @@ fun FlexibleGrid(
             }
         }
 
-        items(1, span = { GridItemSpan(columnsCount) }) {
+        items(count = 1, span = { GridItemSpan(columnsCount) }) {
             Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = horizontalArrangement) {
                 for (i in itemsInRow downTo 0) {
                     val item = layoutViewState.items.get(layoutViewState.items.size - 1 - i)
@@ -150,6 +174,44 @@ fun HorizontalScroll(
             ) {
                 Text(text = item.title)
             }
+        }
+    }
+}
+
+
+@Composable
+fun WidgetLayout(
+    layoutViewState: LayoutViewStateRatio,
+    layoutWidth: Int,
+    paddingValues: PaddingValues,
+    horizontalArrangement: Arrangement.Horizontal,
+) {
+    val itemsHeight = layoutViewState.itemsHeight
+    var itemHeight = 0
+    when (itemsHeight) {
+        is ItemsHeight.Fixed -> itemHeight = itemsHeight.height
+        is ItemsHeight.Dynamic -> itemHeight = layoutWidth * (itemsHeight.heightPercent) / 100
+    }
+
+    Row(
+        modifier = Modifier
+            .width(layoutWidth.dp)
+            .padding(paddingValues)
+            .background(layoutViewState.layoutBackground),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = horizontalArrangement,
+    ) {
+        layoutViewState.items.forEach { item ->
+            Box(
+                modifier = Modifier
+                    .weight(item.widthRatio)
+                    .height(itemHeight.dp)
+                    .background(color = item.background)
+            ) {
+                Text(text = item.title)
+            }
+
+
         }
     }
 }
